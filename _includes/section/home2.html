@@ -1,0 +1,111 @@
+{% assign file = page.fileName %}
+{% assign lang = page.lang %}
+{% assign dataToShow = site.data.[page.folderName][lang][file] %}
+
+{%- assign CustomColor = site.data.theme.colors -%}
+<!-- starting landingPage -->
+<div class="pageHeaderBg">
+    <div class="container">
+        <div class="pageHeading text-center">
+            <h1 class="heading pb-0 m-0">
+                {{dataToShow.h1}}</h1>
+            {%- if dataToShow.h2 -%}
+            <h2>
+                {{dataToShow.h2}}</h2>
+            {%- endif -%}
+        </div>
+    </div>
+    <div class="container-fluid" id="containerWd">
+        <div class="serachSection">
+            <div class="position-relative serachBox">
+                <form action="{{page.url}}/result" id='form' method="GET">
+                    <input style="border-radius: {{CustomColor.inputFieldBorder}}" type="text"
+                        placeholder="Enter up to 15 letters?" class="txtBox" value='' name="search" maxlength="15"
+                        required>
+                    <input
+                        style="border-radius: {{CustomColor.inputFieldBorder}}; background-color: {{CustomColor.inputButtonBg}};"
+                        type="submit" class="serachBtn" id="serach" value>
+
+                    <div class="dictonaryDropdown">
+                        <select class="form-select select_dropDown2" name="dictionary"
+                            aria-label="Default select example">
+                            <option selected value="Dictionary">Dictionary</option>
+                            <option value="twl06" id="twl06">TWL06 (US, Canada, Thailand)</option>
+                            <option value="sowpods" id="sowpods">SOWPODS (Uk and Others)</option>
+                            <option value="wwf" id="wwf">Enable (Words With Friends)</option>
+                        </select>
+                    </div>
+
+                    <div class="wrapper_dropDown d-flex justify-content-end mt-5" style="gap:15px">
+
+                        <div class="advancedFilter" style="position: relative;" onclick="myFunction()">
+                            <input type="button" value="Advanced Filter" class="filterButton">
+                            <div class="angle-arrow2"></div>
+                        </div>
+                    </div>
+                    <div class="fillterWrapper hide">
+                        <div class="text-right times" style="cursor: pointer;">
+                            <img src="../../assets/images/window-close.png" alt="" width="15px">
+
+                        </div>
+                        <div class="startsWith">
+                            <label for="startsWith">Starts With</label>
+                            <input type="text" id="startsWith" placeholder="Prefix" value="" name="prefix">
+                        </div>
+                        <div class="mustInclude">
+                            <label for="mustInclude">Must Include </label>
+                            <input type="text" id="mustInclude" placeholder="Contains" name="contains">
+
+                        </div>
+                        <div class="endsWith">
+                            <label for="endsWith">End With</label>
+                            <input type="text" id="endsWith" placeholder="Suffix" name="suffix">
+
+                        </div>
+
+                        <div class="wordLength same">
+                            <label for="wordLength">Word Length </label>
+                            <input type="text" class="filter_val" id="wordLength" placeholder="Length" name="length"
+                                value="">
+                        </div>
+                        <div style="margin-top: 1.2rem; gap:5px" class="d-flex w-100">
+                            <input type="button" value="Clear" class="clearFilter btn-info  text-white"
+                                style="background-color: {{CustomColor.inputButtonBg}};">
+                            <input type="submit" value="Apply" class="btn-info text-white"
+                                style="background-color: {{CustomColor.inputButtonBg}};">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- close landingPage -->
+<script>
+    const clearFilter = document.querySelector('.clearFilter')
+    let startsWith = document.getElementById('startsWith')
+    let mustInclude = document.getElementById('mustInclude')
+    let endsWith = document.getElementById('endsWith')
+    let wordLength = document.getElementById('wordLength')
+
+    clearFilter.addEventListener('click', () => {
+        startsWith.value = ''
+        mustInclude.value = ''
+        endsWith.value = ''
+        wordLength.value = ''
+    })
+    const advancedFilter = document.querySelector('.advancedFilter')
+    const fillterWrapper = document.querySelector('.fillterWrapper')
+    advancedFilter.addEventListener('click', () => {
+        fillterWrapper.classList.toggle('active')
+        fillterWrapper.classList.remove('hide')
+    })
+
+    const close = document.querySelector('.times')
+    close.addEventListener('click', () => {
+        fillterWrapper.classList.remove('active')
+        fillterWrapper.classList.add('hide')
+    })
+</script>
