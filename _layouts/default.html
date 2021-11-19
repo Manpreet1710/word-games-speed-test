@@ -69,6 +69,7 @@
             var element = document.createElement("script");
             var body = document.getElementById("body")
             element.src = "//monu.delivery/site/d/0/6481fa-881e-4a2e-8a0a-35fdd10adea3.js";
+            element.setAttribute("defer", true)
             body.appendChild(element);
             console.log(body)
         });
