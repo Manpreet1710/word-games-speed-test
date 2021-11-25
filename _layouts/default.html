@@ -43,6 +43,20 @@
     <script defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
     <script>
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+            console.log('DOM fully loaded and parsed');
+            let script = document.createElement("script")
+            script.src = '//monu.delivery/site/d/0/6481fa-881e-4a2e-8a0a-35fdd10adea3.js'
+            script.setAttribute("data-cfasync", "false")
+            script.setAttribute("defer", "defer")
+            document.body.appendChild(script)
+            console.log(script)
+        });
+
+
+
+
         let txtBox = document.querySelector('.txtBox')
         txtBox.addEventListener('input', (e) => {
             e.target.value = e.target.value.replace(/[^a-zA-Z? ]/g, "")
